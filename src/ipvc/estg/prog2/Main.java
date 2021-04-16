@@ -1,13 +1,7 @@
 package ipvc.estg.prog2;
 
-import ipvc.estg.prog2.games.GameSimulator;
-import ipvc.estg.prog2.games.batalhaNaval.players.Jogador;
-import ipvc.estg.prog2.games.batalhaNaval.players.ShipCreator;
-import ipvc.estg.prog2.games.batalhaNaval.players.Tabuleiro;
-import ipvc.estg.prog2.games.connect4.Connect4Simulator;
-import ipvc.estg.prog2.games.connect4.players.GreedyConnect4Player;
-import ipvc.estg.prog2.games.connect4.players.MinimaxConnect4Player;
-import ipvc.estg.prog2.games.connect4.players.RandomConnect4Player;
+import ipvc.estg.prog2.games.batalhaNaval.Jogador;
+import ipvc.estg.prog2.games.batalhaNaval.Tabuleiro;
 
 import java.util.Scanner;
 
@@ -32,8 +26,11 @@ public class Main {
 //                new Connect4Simulator(new RandomConnect4Player("Random 1"),new RandomConnect4Player("Random 2")),10000);
 //        runSimulation("Connect4 - Greedy VS Random",
 //                new Connect4Simulator(new GreedyConnect4Player("Greedy"),new RandomConnect4Player("Random")),10000);
+        Tabuleiro.adicionarNaviosPredefinidos();
+        int venceu1 = 0;
+        int venceu2 = 0;
 
-        System.out.println("BEM-VINDO AO BATALHA NAVAL");
+        System.out.println("\n\nBEM-VINDO AO BATALHA NAVAL");
         System.out.println("1 - Jogador-Computador");
         System.out.println("2 - Jogador-Jogador");
         System.out.println("3 - Computador-Computador");
@@ -41,25 +38,28 @@ public class Main {
 
         char option;
         Scanner entrada = new Scanner(System.in);
+//        Tabuleiro.chamarTabuleiroBarcos();
 
         do {
             option = entrada.next().charAt(0);
 
             switch (option) {
-                case '1':  {
-                    int jogador = 1;
-                    Tabuleiro.adicionarNaviosPredefinidos();
-                    Jogador.jogar(jogador);
-                    Tabuleiro.chamarTabuleiroJogadas(jogador);
+                case '1': {
+                    while (venceu1 == 0 && venceu2 == 0) {
+                        venceu1 = Jogador.jogar(1);
+//                        venceu2 = Jogador.jogar(2);
+                    }
+                    System.out.println("Parabens! Jogador " + (venceu1==1?1:2) + " venceu!");
+                    break;
+                }
+                case '2': {
 
                     break;
                 }
-                default:
-                {
+                default: {
                     System.out.println("Opção inválida!");
                 }
             }
-
         } while (option != '4');
 
     }

@@ -1,10 +1,10 @@
-package ipvc.estg.prog2.games.batalhaNaval.players;
+package ipvc.estg.prog2.games.batalhaNaval;
 
 import java.util.Scanner;
 
 public class Jogador {
-    public static void jogar(int jogador) {
-        System.out.println("INDIQUE 3 POSIÇOES PARA JOGAR");
+    public static int jogar(int jogador) {
+        System.out.println("\n\nJOGADOR "+ jogador + " - INDIQUE 3 POSIÇOES PARA JOGAR");
         int i = 0;
         char linha, coluna;
         Scanner entrada = new Scanner(System.in);
@@ -20,8 +20,15 @@ public class Jogador {
             if (jogada == 0) {
                 System.out.println("Posição já foi ocupada! Insira nova jogada");
             } else {
+                //verifica vitoria
+                if (Tabuleiro.verificarVitoria(jogador) == 1)  {
+                    Tabuleiro.chamarTabuleiroJogadas(jogador);
+                    return 1;
+                }
                 i++;
             }
         }
+        Tabuleiro.chamarTabuleiroJogadas(jogador);
+        return 0;
     }
 }
