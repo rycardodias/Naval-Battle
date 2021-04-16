@@ -38,7 +38,6 @@ public class Main {
 
         char option;
         Scanner entrada = new Scanner(System.in);
-//        Tabuleiro.chamarTabuleiroBarcos();
 
         do {
             option = entrada.next().charAt(0);
@@ -47,7 +46,9 @@ public class Main {
                 case '1': {
                     while (venceu1 == 0 && venceu2 == 0) {
                         venceu1 = Jogador.jogar(1);
-//                        venceu2 = Jogador.jogar(2);
+                        if (venceu1 == 0) {
+                            Jogador.jogar(2);
+                        }
                     }
                     System.out.println("Parabens! Jogador " + (venceu1==1?1:2) + " venceu!");
                     break;

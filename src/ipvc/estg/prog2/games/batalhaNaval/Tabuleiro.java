@@ -26,20 +26,6 @@ public class Tabuleiro {
         }
     }
 
-//    public static void chamarTabuleiroBarcos () {
-//        for (int i = 0; i < numRows; i++) {
-//            System.out.print(i + " ");
-//            for (int j = 0; j < numCols; j++) {
-//                if (j < numCols - 1) {
-//                System.out.print("|" + (tabuleiroBarcos2[i][j]!= null ?tabuleiroBarcos2[i][j] : " ") + "|");
-//                } else {
-//                    System.out.println("|" + (tabuleiroBarcos2[i][j] != null ?tabuleiroBarcos2[i][j] : " ") + "|");
-//                }
-//            }
-//        }
-//    }
-
-
     protected static int verificarJogada(int linha, int coluna, int numeroTabuleiro) {
         int valorJogada = 0;
         if ((numeroTabuleiro == 1 && tabuleiroJogadas1[linha][coluna] != null) ||
