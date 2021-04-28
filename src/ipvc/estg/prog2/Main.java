@@ -45,9 +45,9 @@ public class Main {
             switch (option) {
                 case '1': {
                     while (venceu1 == 0 && venceu2 == 0) {
-                        venceu1 = Jogador.jogar(1);
+                        venceu1 = Jogador.jogarManual(1);
                         if (venceu1 == 0) {
-                            Jogador.jogar(2);
+                            Jogador.jogarManual(2);
                         }
                     }
                     System.out.println("Parabens! Jogador " + (venceu1==1?1:2) + " venceu!");

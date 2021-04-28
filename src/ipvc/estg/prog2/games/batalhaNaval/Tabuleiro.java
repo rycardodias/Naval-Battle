@@ -9,6 +9,7 @@ public class Tabuleiro {
     private static final Integer[][] tabuleiroJogadas2 = new Integer[numRows][numCols];
 
     public static void chamarTabuleiroJogadas(int numeroTabuleiro) {
+        System.out.println("\n   TABULEIRO JOGADOR " + numeroTabuleiro);
         System.out.println("   0 1 2 3 4 5 6 7 8 9");
         for (int i = 0; i < numRows; i++) {
             System.out.print(i + " ");
@@ -38,7 +39,7 @@ public class Tabuleiro {
         } else if (numeroTabuleiro == 2 && tabuleiroBarcos1[linha][coluna] != null) {
             valorJogada = tabuleiroBarcos1[linha][coluna];
         }
-
+        //adiciona o respetivo numero do barco acertado
         adicionarJogada(linha, coluna, numeroTabuleiro, valorJogada);
         return 1;
     }
@@ -50,6 +51,7 @@ public class Tabuleiro {
         } else {
             System.out.println("Acertou num navio de tamanho " + valor);
         }
+
         if (numeroTabuleiro == 1) {
             tabuleiroJogadas1[linha][coluna] = valor;
         } else {
