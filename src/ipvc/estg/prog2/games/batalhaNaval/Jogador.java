@@ -45,21 +45,22 @@ public class Jogador {
                 } else {
                     i++;
                 }
-
             }
-
         }
-        Tabuleiro.chamarTabuleiroJogadas(jogador);
         return 0;
     }
 
     public static int jogarAutomatico(int jogador, int algoritmo) {
         int i = 0;
-        int[] posicao = new int[2];
+        int[] posicao;
 
         while (i < 3) {
             if (algoritmo == 1) {
-                posicao = AlgoritmosPesquisa.random();
+                posicao = AlgoritmosPesquisa.dificuldadeFacil();
+            } else if (algoritmo == 2) {
+                posicao = AlgoritmosPesquisa.dificuldadeMedia();
+            } else {
+                posicao = AlgoritmosPesquisa.dificuldadeAlta();
             }
 
 
@@ -75,7 +76,6 @@ public class Jogador {
             }
         }
 
-        Tabuleiro.chamarTabuleiroJogadas(jogador);
         return 0;
     }
 }

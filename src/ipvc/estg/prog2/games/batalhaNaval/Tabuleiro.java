@@ -7,6 +7,15 @@ public class Tabuleiro {
     private static final Integer[][] tabuleiroBarcos2 = new Integer[numRows][numCols];
     private static final Integer[][] tabuleiroJogadas1 = new Integer[numRows][numCols];
     private static final Integer[][] tabuleiroJogadas2 = new Integer[numRows][numCols];
+    static Integer mensagens = 0;
+
+    protected static void mostrarMensagens(int valor) {
+        if (valor == 1) {
+            mensagens = 1;
+        } else {
+            mensagens = 0;
+        }
+    }
 
     public static void chamarTabuleiroJogadas(int numeroTabuleiro) {
         System.out.println("\n   TABULEIRO JOGADOR " + numeroTabuleiro);
@@ -46,10 +55,12 @@ public class Tabuleiro {
 
 
     private static void adicionarJogada(int linha, int coluna, int numeroTabuleiro, int valor) {
-        if (valor == 0) {
-            System.out.println("Acertou na agua!");
-        } else {
-            System.out.println("Acertou num navio de tamanho " + valor);
+        if (mensagens == 1) {
+            if (valor == 0) {
+                System.out.println("Acertou na agua!");
+            } else {
+                System.out.println("Acertou num navio de tamanho " + valor);
+            }
         }
 
         if (numeroTabuleiro == 1) {
@@ -101,23 +112,25 @@ public class Tabuleiro {
             }
         }
 
-        if (barcos1 == 4) {
-            System.out.println("Acertou em todos os barcos de tamanho 1");
-        }
-        if (barcos2 == 4) {
-            System.out.println("Acertou em todos os barcos de tamanho 2");
-        }
-        if (barcos3 == 6) {
-            System.out.println("Acertou em todos os barcos de tamanho 3");
-        }
-        if (barcos4 == 4) {
-            System.out.println("Acertou em todos os barcos de tamanho 4");
-        }
-        if (barcos5 == 5) {
-            System.out.println("Acertou em todos os barcos de tamanho 5");
+        if (mensagens == 1) {
+            if (barcos1 == 4) {
+                System.out.println("Acertou em todos os barcos de tamanho 1");
+            }
+            if (barcos2 == 6) {
+                System.out.println("Acertou em todos os barcos de tamanho 2");
+            }
+            if (barcos3 == 6) {
+                System.out.println("Acertou em todos os barcos de tamanho 3");
+            }
+            if (barcos4 == 4) {
+                System.out.println("Acertou em todos os barcos de tamanho 4");
+            }
+            if (barcos5 == 5) {
+                System.out.println("Acertou em todos os barcos de tamanho 5");
+            }
         }
 
-        if (barcos1 == 4 && barcos2 == 4 && barcos3 == 6 && barcos4 == 4 && barcos5 == 5) {
+        if (barcos1 == 4 && barcos2 == 6 && barcos3 == 6 && barcos4 == 4 && barcos5 == 5) {
             return 1;
         }
         return 0;

@@ -3,7 +3,7 @@ package ipvc.estg.prog2.games.batalhaNaval;
 import java.util.Random;
 
 public class AlgoritmosPesquisa {
-    protected static int[] random () {
+    protected static int[] dificuldadeFacil () {
         int[] posicao = new int[2];
         Random r = new Random();
 
@@ -13,5 +13,17 @@ public class AlgoritmosPesquisa {
         //Tens de desenvolver o algoritmo que retorne uma posição de cada vez mais indicada.
         //por cada "jogada" este algoritmo vai ser chamado 3 vezes
         return posicao; //[X][Y]
+    }
+
+    protected static int[] dificuldadeMedia() {
+        int[] posicao = new int[2];
+
+        return posicao;
+    }
+
+    protected static int[] dificuldadeAlta() {
+        int[] posicao = new int[2];
+
+        return posicao;
     }
 }
