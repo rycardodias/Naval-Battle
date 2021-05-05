@@ -9,7 +9,7 @@ public class Jogador {
         int jogadaValida = 0;
         int[] aux = new int[2];
 
-        jogadaValida = Tabuleiro.verificarJogada(Character.getNumericValue(linha), Character.getNumericValue(coluna), jogador);
+        jogadaValida = Tabuleiro.verificarJogada(linha, coluna, jogador);
 
         if (jogadaValida == 1) {
             venceu = Tabuleiro.verificarVitoria(jogador);
@@ -24,15 +24,15 @@ public class Jogador {
     public static int jogarManual(int jogador) {
         System.out.println("\n\nJOGADOR " + jogador + " - INDIQUE 3 POSIÇOES PARA JOGAR");
         int i = 0;
-        char linha, coluna;
+        int linha, coluna;
         Scanner entrada = new Scanner(System.in);
 
         while (i < 3) {
             System.out.println("\nJogada " + (i + 1));
             System.out.print("Linha: ");
-            linha = entrada.next().charAt(0);
+            linha = Character.getNumericValue(entrada.next().charAt(0));
             System.out.print("Coluna: ");
-            coluna = entrada.next().charAt(0);
+            coluna = Character.getNumericValue(entrada.next().charAt(0));
 
             int[] valorJogada = jogar(jogador, linha, coluna);
 
@@ -58,9 +58,8 @@ public class Jogador {
         int[] posicao = new int[2];
 
         while (i < 3) {
-            char linha = 0, coluna = 0;
             if (algoritmo == 1) {
-                posicao = AlgoritmosPesquisa.monteCarlo();
+                posicao = AlgoritmosPesquisa.random();
             }
 
 

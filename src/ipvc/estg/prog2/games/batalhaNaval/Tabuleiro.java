@@ -100,11 +100,29 @@ public class Tabuleiro {
 
             }
         }
+
+        if (barcos1 == 4) {
+            System.out.println("Acertou em todos os barcos de tamanho 1");
+        }
+        if (barcos2 == 4) {
+            System.out.println("Acertou em todos os barcos de tamanho 2");
+        }
+        if (barcos3 == 6) {
+            System.out.println("Acertou em todos os barcos de tamanho 3");
+        }
+        if (barcos4 == 4) {
+            System.out.println("Acertou em todos os barcos de tamanho 4");
+        }
+        if (barcos5 == 5) {
+            System.out.println("Acertou em todos os barcos de tamanho 5");
+        }
+
         if (barcos1 == 4 && barcos2 == 4 && barcos3 == 6 && barcos4 == 4 && barcos5 == 5) {
             return 1;
         }
         return 0;
     }
+
 
     public static void adicionarNaviosPredefinidos() {
         //adicionar barco1
