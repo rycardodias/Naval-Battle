@@ -54,6 +54,7 @@ public class Tabuleiro {
     }
 
 
+
     private static void adicionarJogada(int linha, int coluna, int numeroTabuleiro, int valor) {
         if (mensagens == 1) {
             if (valor == 0) {
