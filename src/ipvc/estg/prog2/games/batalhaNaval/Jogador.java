@@ -55,21 +55,16 @@ public class Jogador {
 
     public static int jogarAutomatico(int jogador, int algoritmo) {
         int i = 0;
+        int[] posicao = new int[2];
 
         while (i < 3) {
             char linha = 0, coluna = 0;
-            switch (algoritmo) {
-                case 1: {
-                    /**
-                     * CHAMAR O PRIMEIRO ALGORITMO
-                     * TEM DE RETOMAR LINHA E COLUNA
-                     */
-                    break;
-                }
+            if (algoritmo == 1) {
+                posicao = AlgoritmosPesquisa.monteCarlo();
             }
 
 
-            int[] valorJogada = jogar(jogador, linha, coluna);
+            int[] valorJogada = jogar(jogador, posicao[0], posicao[1]);
 
             if (valorJogada[0] == 1) {
                 Tabuleiro.chamarTabuleiroJogadas(jogador);
