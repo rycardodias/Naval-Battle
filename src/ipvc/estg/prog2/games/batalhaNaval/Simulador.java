@@ -16,8 +16,6 @@ public class Simulador {
     public static int correrSimulador(int tipoJogo) {
         int[] venceu = new int[2]; //[VITORIA][JOGADOR]
 
-
-
         switch (tipoJogo) {
             case 1: { //JOGADOR-JOGADOR
                 Tabuleiro.mostrarMensagens(1);
@@ -25,7 +23,7 @@ public class Simulador {
                     venceu[0] = Jogador.jogarManual(1);
                     venceu[1] = 1;
                     if (venceu[0] == 0) {
-                        Jogador.jogarManual(2);
+                        venceu[0] = Jogador.jogarManual(2);
                         venceu[1] = 2;
                     }
                 }
