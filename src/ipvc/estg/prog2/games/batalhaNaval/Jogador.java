@@ -38,6 +38,8 @@ public class Jogador {
                 Tabuleiro.adicionarNovaJogada(linha, coluna, jogador);
 
                 if (Tabuleiro.verificarVitoria(jogador)==1) {
+                    Tabuleiro.chamarTabuleiroJogadas(jogador);
+                    System.out.println("Parabens! Jogador " + jogador + " venceu!");
                     return 1; //VENCEU
                 }
                 i++;
@@ -65,6 +67,8 @@ public class Jogador {
                 Tabuleiro.adicionarNovaJogada(posicao[0], posicao[1], jogador);
 
                 if (Tabuleiro.verificarVitoria(jogador)==1) {
+                    Tabuleiro.chamarTabuleiroJogadas(jogador);
+                    System.out.println("Parabens! Jogador " + jogador + " venceu!");
                     return 1; //VENCEU
                 }
                 i++;

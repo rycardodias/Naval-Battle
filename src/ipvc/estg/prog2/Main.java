@@ -9,8 +9,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Tabuleiro.adicionarNaviosPredefinidos();
-        int venceu1 = 0;
-        int venceu2 = 0;
 
         System.out.println("\n\nBEM-VINDO AO BATALHA NAVAL");
         System.out.println("1 - Jogador-Jogador");
@@ -22,12 +20,8 @@ public class Main {
         Scanner entrada = new Scanner(System.in);
 
         do {
-
             option = entrada.next().charAt(0);
 
-
-//            Simulador.correrSimulador(1);
-//
             switch (option) {
                 case '1': {
                     Simulador.correrSimulador(1);
