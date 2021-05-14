@@ -1,12 +1,17 @@
 package ipvc.estg.prog2.games.batalhaNaval;
 
+import java.util.Arrays;
+
 public class Tabuleiro {
     private static final int numRows = 10;
     private static final int numCols = 10;
     private static final Integer[][] tabuleiroBarcos1 = new Integer[numRows][numCols];
     private static final Integer[][] tabuleiroBarcos2 = new Integer[numRows][numCols];
-    private static final Integer[][] tabuleiroJogadas1 = new Integer[numRows][numCols];
-    private static final Integer[][] tabuleiroJogadas2 = new Integer[numRows][numCols];
+    public static final Integer[][] tabuleiroJogadas1 = new Integer[numRows][numCols];
+    public static final Integer[][] tabuleiroJogadas2 = new Integer[numRows][numCols];
+
+//    public static Integer[] arrayTabuleiro1 = new Integer[100];
+//    public static Integer[] arrayTabuleiro2 = new Integer[100];
     static Integer mensagens = 0;
 
     protected static void mostrarMensagens(int valor) {
@@ -14,6 +19,15 @@ public class Tabuleiro {
             mensagens = 1;
         } else {
             mensagens = 0;
+        }
+    }
+
+    protected static void limparTabuleiros() {
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                tabuleiroJogadas1[i][j] = null;
+                tabuleiroJogadas2[i][j] = null;
+            }
         }
     }
 
@@ -36,52 +50,24 @@ public class Tabuleiro {
         }
     }
 
-//    protected static int verificarJogada(int linha, int coluna, int numeroTabuleiro) {
-//        int valorJogada = 0;
-//
-//        if ((numeroTabuleiro == 1 && tabuleiroJogadas1[linha][coluna] != null) ||
-//                (numeroTabuleiro == 2 && tabuleiroJogadas2[linha][coluna] != null)) {
-//            return 0;
-//        }
-//        if (numeroTabuleiro == 1 && tabuleiroBarcos2[linha][coluna] != null) {
-//            valorJogada = tabuleiroBarcos2[linha][coluna];
-//
-//        } else if (numeroTabuleiro == 2 && tabuleiroBarcos1[linha][coluna] != null) {
-//            valorJogada = tabuleiroBarcos1[linha][coluna];
-//        }
-//        //adiciona o respetivo numero do barco acertado
-//        adicionarJogada(linha, coluna, numeroTabuleiro, valorJogada);
-////        adicionarPosicaoJogada(linha, coluna, numeroTabuleiro, valorJogada);
-//        return 1;
-//    }
-//
-//    private static void adicionarJogada(int linha, int coluna, int numeroTabuleiro, int valor) {
-//        if (mensagens == 1) {
-//            if (valor == 0) {
-//                System.out.println("Acertou na agua!");
-//            } else {
-//                System.out.println("Acertou num navio de tamanho " + valor);
-//            }
-//        }
-//
-//        if (numeroTabuleiro == 1) {
-//            tabuleiroJogadas1[linha][coluna] = valor;
-//        } else {
-//            tabuleiroJogadas2[linha][coluna] = valor;
-//        }
-//    }
-
-    protected static int verificarPosicaoLivre (int i, int j, int tabuleiro) {
-        if ((tabuleiro==1 && tabuleiroJogadas1[i][j] != null) || (tabuleiro==2 && tabuleiroJogadas2[i][j] != null )) {
+    protected static int verificarPosicaoLivre(int i, int j, int tabuleiro) {
+        if ((tabuleiro == 1 && tabuleiroJogadas1[i][j] != null) || (tabuleiro == 2 && tabuleiroJogadas2[i][j] != null)) {
             return 0;
         }
         return 1;
     }
 
-    protected static void adicionarNovaJogada(int i, int j, int tabuleiro) {
-        int tamanhoBarco = 0;
+//    protected static int verificarValorJogada(int i, int j, int tabuleiro) {
+//        if (tabuleiro == 1) {
+//            return (tabuleiroJogadas1[i][j] != null ? tabuleiroJogadas1[i][j] : 0);
+//        }
+//        return (tabuleiroJogadas2[i][j] != null ? tabuleiroJogadas2[i][j] : 0);
+//    }
 
-        if (tabuleiro==1) {
+    protected static int adicionarNovaJogada(int i, int j, int tabuleiro) {
+        int tamanhoBarco;
+
+        if (tabuleiro == 1) {
             tamanhoBarco = (tabuleiroBarcos2[i][j] != null ? tabuleiroBarcos2[i][j] : 0);
             tabuleiroJogadas1[i][j] = tamanhoBarco;
         } else {
@@ -96,7 +82,22 @@ public class Tabuleiro {
                 System.out.println("Acertou num navio de tamanho " + tamanhoBarco);
             }
         }
+        return tamanhoBarco;
     }
+
+
+//    protected static void popularArray(int tabuleiro) {
+//
+//        for (int i = 0; i < numRows; i++) {
+//            for (int j = 0; j < numCols; j++) {
+//                if ((tabuleiro == 1)) {
+//                    arrayTabuleiro1[i * 10 + j] = (tabuleiroJogadas1[i][j] == null ? 0 : tabuleiroJogadas1[i][j]);
+//                } else {
+//                    arrayTabuleiro2[i * 10 + j] = (tabuleiroJogadas2[i][j] == null ? 0 : tabuleiroJogadas2[i][j]);
+//                }
+//            }
+//        }
+//    }
 
     protected static int verificarVitoria(int jogador) {
         int barcos1 = 0;
@@ -163,8 +164,6 @@ public class Tabuleiro {
         }
         return 0;
     }
-
-
 
 
     public static void adicionarNaviosPredefinidos() {

@@ -12,7 +12,7 @@ public class Simulador {
         return resposta;
     }
 
-    public static int correrSimulador(int tipoJogo) {
+    public static void correrSimulador(int tipoJogo) {
         int venceu = 0;
 
         switch (tipoJogo) {
@@ -36,17 +36,17 @@ public class Simulador {
                     }
                 }
             }
-            case 3: { //JOGADOR-COMPUTADOR
+            case 3: { //COMPUTADOR-COMPUTADOR
                 Tabuleiro.mostrarMensagens(0);
                 while (venceu == 0) {
-                    venceu = Jogador.jogarAutomatico(1, 1);
+                    venceu = Jogador.jogarAutomatico(1, 2);
                     if (venceu == 0) {
                         venceu = Jogador.jogarAutomatico(2, 1);
                     }
                 }
             }
         }
-        return 0;
+        Tabuleiro.limparTabuleiros();
     }
 
 

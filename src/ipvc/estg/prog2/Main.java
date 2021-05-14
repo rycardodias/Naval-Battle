@@ -8,18 +8,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Tabuleiro.adicionarNaviosPredefinidos();
 
-        System.out.println("\n\nBEM-VINDO AO BATALHA NAVAL");
-        System.out.println("1 - Jogador-Jogador");
-        System.out.println("2 - Jogador-Computador");
-        System.out.println("3 - Computador-Computador");
-        System.out.println("4 - Sair");
+        int valor = 10;
+        int valorInicial = valor/ 10;
+
+        System.out.println(valorInicial);
+        Tabuleiro.adicionarNaviosPredefinidos();
 
         char option;
         Scanner entrada = new Scanner(System.in);
 
         do {
+            System.out.println("\n\nBEM-VINDO AO BATALHA NAVAL");
+            System.out.println("1 - Jogador-Jogador");
+            System.out.println("2 - Jogador-Computador");
+            System.out.println("3 - Computador-Computador");
+            System.out.println("4 - Sair");
             option = entrada.next().charAt(0);
 
             switch (option) {

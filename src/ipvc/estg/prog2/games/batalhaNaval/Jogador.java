@@ -3,7 +3,7 @@ package ipvc.estg.prog2.games.batalhaNaval;
 import java.util.Scanner;
 
 public class Jogador {
-        public static int jogarManual(int jogador) {
+    public static int jogarManual(int jogador) {
         System.out.println("\n\nJOGADOR " + jogador + " - INDIQUE 3 POSIÇOES PARA JOGAR");
         int i = 0;
         int linha, coluna;
@@ -16,10 +16,10 @@ public class Jogador {
             System.out.print("Coluna: ");
             coluna = Character.getNumericValue(entrada.next().charAt(0));
 
-            if(Tabuleiro.verificarPosicaoLivre(linha, coluna, jogador)==1) {
+            if (Tabuleiro.verificarPosicaoLivre(linha, coluna, jogador) == 1) {
                 Tabuleiro.adicionarNovaJogada(linha, coluna, jogador);
 
-                if (Tabuleiro.verificarVitoria(jogador)==1) {
+                if (Tabuleiro.verificarVitoria(jogador) == 1) {
                     Tabuleiro.chamarTabuleiroJogadas(jogador);
                     System.out.println("Parabens! Jogador " + jogador + " venceu!");
                     return 1; //VENCEU
@@ -33,30 +33,12 @@ public class Jogador {
     }
 
     public static int jogarAutomatico(int jogador, int algoritmo) {
-        int i = 0;
-        int[] posicao;
-
-        while (i < 3) {
-            if (algoritmo == 1) {
-                posicao = AlgoritmosPesquisa.dificuldadeFacil(jogador);
-            } else if (algoritmo == 2) {
-                posicao = AlgoritmosPesquisa.dificuldadeMedia(jogador);
-            } else {
-                posicao = AlgoritmosPesquisa.dificuldadeAlta(jogador);
-            }
-
-            if(Tabuleiro.verificarPosicaoLivre(posicao[0], posicao[1], jogador)==1) {
-                Tabuleiro.adicionarNovaJogada(posicao[0], posicao[1], jogador);
-
-                if (Tabuleiro.verificarVitoria(jogador)==1) {
-                    Tabuleiro.chamarTabuleiroJogadas(jogador);
-                    System.out.println("Parabens! Jogador " + jogador + " venceu!");
-                    return 1; //VENCEU
-                }
-                i++;
-            }
+        if (algoritmo == 1) {
+            return AlgoritmosPesquisa.dificuldadeFacil(jogador);
+        } else if (algoritmo == 2) {
+            return AlgoritmosPesquisa.dificuldadeMedia(jogador);
+        } else {
+            return AlgoritmosPesquisa.dificuldadeAlta(jogador);
         }
-
-        return 0;
     }
 }
