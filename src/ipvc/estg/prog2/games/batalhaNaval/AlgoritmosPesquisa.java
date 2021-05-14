@@ -1,7 +1,6 @@
 package ipvc.estg.prog2.games.batalhaNaval;
 
 import java.util.Random;
-import java.util.Stack;
 
 public class AlgoritmosPesquisa {
 
@@ -14,53 +13,6 @@ public class AlgoritmosPesquisa {
         return 0;
     }
 
-    private static int[] calcularAdjacente(int i, int j) {
-        int[] posicao = new int[2];
-        int k = 0;
-        Random r = new Random();
-
-        while (k < 1) {
-            switch (r.nextInt(4) + 1) {
-                case 1 -> { //direita
-                    if (j < 9) {
-                        posicao[0] = i;
-                        posicao[1] = j + 1;
-                        k++;
-                    } else if (j == 9 && i < 9) {
-                        posicao[0] = i + 1;
-                        posicao[1] = 0;
-                        k++;
-                    }
-                }
-                case 2 -> { //baixo
-                    if (i < 9) {
-                        posicao[0] = i + 1;
-                        posicao[1] = j;
-                        k++;
-                    }
-                }
-                case 3 -> { //esquerda
-                    if (j > 0) {
-                        posicao[0] = i;
-                        posicao[1] = j - 1;
-                        k++;
-                    } else if (j == 0 && i > 0) {
-                        posicao[0] = i - 1;
-                        posicao[1] = 9;
-                        k++;
-                    }
-                }
-                case 4 -> { //cima
-                    if (i > 0) {
-                        posicao[0] = i - 1;
-                        posicao[1] = j;
-                        k++;
-                    }
-                }
-            }
-        }
-        return posicao;
-    }
 
     //os algoritmos sao chamados uma vez por posição,
     //cada vez que chamar o algoritmo vai devolver apenas uma posição e verificar no jogo
@@ -77,57 +29,138 @@ public class AlgoritmosPesquisa {
 
             Tabuleiro.adicionarNovaJogada(posicao[0], posicao[1], jogador);
 
-            if (verificarVitoria(jogador) == 1) return 1;
+            if (verificarVitoria(jogador) == 1) {
+                return 1;
+            }
             i++;
         }
+        Tabuleiro.chamarTabuleiroJogadas(jogador);
 
-        return 0; //[X][Y]
+        return 0;
     }
 
-    public static int[] adjacenteGlobal = new int[2];
+    public static int[] posicaoCentral1 = new int[3];
+    public static int[] posicaoCentral2 = new int[3];
 
     protected static int dificuldadeMedia(int jogador) {
-        int[] posicao = new int[2];
+        int[] posicao = new int[3];
         int i = 0;
         Random r = new Random();
-        int[] adjacente = new int[3]; //[i][j][alterado]
-
-        System.out.println(adjacenteGlobal[0] + "este");
 
         while (i < 3) {
-            while (Tabuleiro.verificarPosicaoLivre(posicao[0], posicao[1], jogador) == 0) {
+            System.out.println("-" + posicaoCentral2[0] + "-" + posicaoCentral2[1] + "-" + posicaoCentral2[2] + "ANTES");
+            if (jogador == 1 && posicaoCentral1[2] == 1) {
+                if(adicionarAdjacente(posicaoCentral1[0], posicaoCentral1[1], jogador)== 0) {
+                    i--;
+                };
+            } else if (jogador == 2 && posicaoCentral2[2] == 1) {
+                if(adicionarAdjacente(posicaoCentral2[0], posicaoCentral2[1], jogador)== 0) {
+                    i--;
+                };
+            } else { //se nao tem posicao central vai buscar um random
 
-                posicao[0] = (adjacenteGlobal[2]==1 ? adjacenteGlobal[0]: r.nextInt(10));
-                posicao[1] = (adjacenteGlobal[2]==1 ? adjacenteGlobal[1]: r.nextInt(10));
-            }
+                while (Tabuleiro.verificarPosicaoLivre(posicao[0], posicao[1], jogador) == 0) {
+                    posicao[0] = r.nextInt(10);
+                    posicao[1] = r.nextInt(10);
+                }
 
-            int valorJogada = Tabuleiro.adicionarNovaJogada(posicao[0], posicao[1], jogador);
-
-            if (valorJogada > 1) {
-//                System.out.println("maior");
-                //guardar posicao na stack
-//                    adjacente = calcularAdjacente(posicao[0], posicao[1]); //[x][y] novo
-
-            } else {
-//                System.out.println("menor");
                 Tabuleiro.adicionarNovaJogada(posicao[0], posicao[1], jogador);
+
+                if (jogador == 1) {
+                    posicaoCentral1[0] = posicao[0];
+                    posicaoCentral1[1] = posicao[1];
+                    posicaoCentral1[2] = 1;
+                } else {
+                    posicaoCentral2[0] = posicao[0];
+                    posicaoCentral2[1] = posicao[1];
+                    posicaoCentral2[2] = 1;
+                }
             }
 
-            if (verificarVitoria(jogador) == 1) return 1;
+            if (verificarVitoria(jogador) == 1) {
+                return 1;
+            }
             i++;
         }
-
-        return 0; //[X][Y]
+        Tabuleiro.chamarTabuleiroJogadas(jogador);
+        return 0;
     }
+
 
     protected static int dificuldadeAlta(int jogador) {
         int[] posicao = new int[2];
         int i = 0;
         Random r = new Random();
 
-
-
         return 1; //[X][Y]
+    }
+
+    private static int adicionarAdjacente(int i, int j, int jogador) {
+        int posicaoValida = 0;
+        int d = 0;
+        int b = 0;
+        int e = 0;
+        int c = 0;
+        Random r = new Random();
+        int[] posicao = new int[3];
+
+        while ((posicaoValida == 0) && (d < 1 || b < 1 || e < 1 || c < 1)) {
+            switch (r.nextInt(4) + 1) {
+                case 1 -> { //direita
+                    if (d < 1) {
+                        d++;
+                        if (j < 9) {
+                            posicao[0] = i;
+                            posicao[1] = j + 1;
+                        } else if (j == 9 && i < 9) {
+                            posicao[0] = i + 1;
+                            posicao[1] = 0;
+                        }
+                    }
+                }
+                case 2 -> { //baixo
+                    if (b < 1) {
+                        b++;
+                        if (i < 9) {
+                            posicao[0] = i + 1;
+                            posicao[1] = j;
+                        }
+                    }
+                }
+                case 3 -> { //esquerda
+                    if (e < 1) {
+                        e++;
+                        if (j > 0) {
+                            posicao[0] = i;
+                            posicao[1] = j - 1;
+                        } else if (j == 0 && i > 0) {
+                            posicao[0] = i - 1;
+                            posicao[1] = 9;
+                        }
+                    }
+                }
+                case 4 -> { //cima
+                    if (c < 1) {
+                        c++;
+                        if (i > 0) {
+                            posicao[0] = i - 1;
+                            posicao[1] = j;
+                        }
+                    }
+                }
+            }
+
+            posicaoValida = Tabuleiro.verificarPosicaoLivre(posicao[0], posicao[1], jogador);
+        }
+
+        if (posicaoValida == 1) {
+            Tabuleiro.adicionarNovaJogada(posicao[0], posicao[1], jogador);
+            return 1;
+        } else {
+            if (jogador == 1) posicaoCentral1[2] = 0;
+            if (jogador == 2) posicaoCentral2[2] = 0;
+            return 0;
+        }
     }
 
 
