@@ -44,8 +44,6 @@ public class AlgoritmosPesquisa {
 
     protected static int dificuldadeMedia(int jogador) {
         int jogadaAdicionada = 0;
-        int i = 0;
-        Random r = new Random();
 
         for (int j = 0; (j < 10) && (jogadaAdicionada < 3); j++) {
             for (int k = 0; (k < 10) && (jogadaAdicionada < 3); k++) {
@@ -53,6 +51,9 @@ public class AlgoritmosPesquisa {
                         ((arrayBuracos1[j][k] == 0 && jogador == 1) || (arrayBuracos2[j][k] == 0 && jogador == 2))) {
 
                     if (Tabuleiro.adicionarNovaJogada(j, k, jogador)==1) {
+                        if (verificarVitoria(jogador) == 1) {
+                            return 1;
+                        }
                         if (k<9) {
                             posicaoSeguinteBuracos(j, k, jogador);
                         }
@@ -62,31 +63,11 @@ public class AlgoritmosPesquisa {
                 }
             }
         }
-
         Tabuleiro.chamarTabuleiroJogadas(jogador);
         return 0;
     }
 
-    private static void posicaoSeguinteBuracos(int i, int j, int tabuleiro) {
-        if (tabuleiro == 1) {
-            if (j < 9) {
-                arrayBuracos1[i][j + 1] = 1;
-            } else if (j == 9 && i < 9) {
-                arrayBuracos1[i + 1][0] = 1;
-            } else {
-                arrayBuracos1[i][j] = 1;
-            }
-        } else {
-            if (j < 9) {
-                arrayBuracos2[i][j + 1] = 1;
-            } else if (j == 9 && i < 9) {
-                arrayBuracos2[i + 1][0] = 1;
-            } else {
-                arrayBuracos2[i][j] = 1;
-            }
-        }
 
-    }
 
     public static int[] posicaoCentral1 = new int[3];
     public static int[] posicaoCentral2 = new int[3];
@@ -134,6 +115,27 @@ public class AlgoritmosPesquisa {
         }
         Tabuleiro.chamarTabuleiroJogadas(jogador);
         return 0;
+    }
+
+    private static void posicaoSeguinteBuracos(int i, int j, int tabuleiro) {
+        if (tabuleiro == 1) {
+            if (j < 9) {
+                arrayBuracos1[i][j + 1] = 1;
+            } else if (j == 9 && i < 9) {
+                arrayBuracos1[i + 1][0] = 1;
+            } else {
+                arrayBuracos1[i][j] = 1;
+            }
+        } else {
+            if (j < 9) {
+                arrayBuracos2[i][j + 1] = 1;
+            } else if (j == 9 && i < 9) {
+                arrayBuracos2[i + 1][0] = 1;
+            } else {
+                arrayBuracos2[i][j] = 1;
+            }
+        }
+
     }
 
 

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Jogador {
     public static int jogarManual(int jogador) {
-        System.out.println("\n\nJOGADOR " + jogador + " - INDIQUE 3 POSIÇOES PARA JOGAR");
+        System.out.println("\nJOGADOR " + jogador + " - INDIQUE 3 POSIÇOES PARA JOGAR");
         int i = 0;
         int linha, coluna;
         Scanner entrada = new Scanner(System.in);
@@ -29,6 +29,7 @@ public class Jogador {
                 System.out.println("Posição já foi ocupada! Insira nova jogada");
             }
         }
+        Tabuleiro.chamarTabuleiroJogadas(jogador);
         return 0; //NAO VENCEU
     }
 

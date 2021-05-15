@@ -8,11 +8,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        int valor = 10;
-        int valorInicial = valor/ 10;
-
-        System.out.println(valorInicial);
         Tabuleiro.adicionarNaviosPredefinidos();
 
         char option;
