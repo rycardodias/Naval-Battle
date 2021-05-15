@@ -1,6 +1,5 @@
 package ipvc.estg.prog2;
 
-import ipvc.estg.prog2.games.batalhaNaval.Jogador;
 import ipvc.estg.prog2.games.batalhaNaval.Simulador;
 import ipvc.estg.prog2.games.batalhaNaval.Tabuleiro;
 

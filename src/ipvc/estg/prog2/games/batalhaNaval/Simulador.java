@@ -39,9 +39,9 @@ public class Simulador {
             case 3: { //COMPUTADOR-COMPUTADOR
                 Tabuleiro.mostrarMensagens(0);
                 while (venceu == 0) {
-                    venceu = Jogador.jogarAutomatico(1, 2);
+                    venceu = Jogador.jogarAutomatico(1, 1);
                     if (venceu == 0) {
-                        venceu = Jogador.jogarAutomatico(2, 2);
+                        venceu = Jogador.jogarAutomatico(2, 1);
                     }
                 }
             }
