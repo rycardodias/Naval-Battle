@@ -10,8 +10,6 @@ public class Tabuleiro {
     public static final Integer[][] tabuleiroJogadas1 = new Integer[numRows][numCols];
     public static final Integer[][] tabuleiroJogadas2 = new Integer[numRows][numCols];
 
-//    public static Integer[] arrayTabuleiro1 = new Integer[100];
-//    public static Integer[] arrayTabuleiro2 = new Integer[100];
     static Integer mensagens = 0;
 
     protected static void mostrarMensagens(int valor) {
@@ -57,12 +55,12 @@ public class Tabuleiro {
         return 1;
     }
 
-//    protected static int verificarValorJogada(int i, int j, int tabuleiro) {
-//        if (tabuleiro == 1) {
-//            return (tabuleiroJogadas1[i][j] != null ? tabuleiroJogadas1[i][j] : 0);
-//        }
-//        return (tabuleiroJogadas2[i][j] != null ? tabuleiroJogadas2[i][j] : 0);
-//    }
+    protected static int verificarTamanhoBarco(int i, int j, int tabuleiro) {
+        if ((tabuleiro == 1 && tabuleiroJogadas1[i][j] != null) || (tabuleiro == 2 && tabuleiroJogadas2[i][j] != null)) {
+            return (tabuleiro==1 ? tabuleiroJogadas1[i][j]: tabuleiroJogadas2[i][j]);
+        }
+        return 0;
+    }
 
     protected static int adicionarNovaJogada(int i, int j, int tabuleiro) {
         int tamanhoBarco;
@@ -84,20 +82,6 @@ public class Tabuleiro {
         }
         return tamanhoBarco;
     }
-
-
-//    protected static void popularArray(int tabuleiro) {
-//
-//        for (int i = 0; i < numRows; i++) {
-//            for (int j = 0; j < numCols; j++) {
-//                if ((tabuleiro == 1)) {
-//                    arrayTabuleiro1[i * 10 + j] = (tabuleiroJogadas1[i][j] == null ? 0 : tabuleiroJogadas1[i][j]);
-//                } else {
-//                    arrayTabuleiro2[i * 10 + j] = (tabuleiroJogadas2[i][j] == null ? 0 : tabuleiroJogadas2[i][j]);
-//                }
-//            }
-//        }
-//    }
 
     protected static int verificarVitoria(int jogador) {
         int barcos1 = 0;

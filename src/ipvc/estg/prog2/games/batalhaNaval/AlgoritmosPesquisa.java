@@ -39,24 +39,74 @@ public class AlgoritmosPesquisa {
         return 0;
     }
 
+    public static int[][] arrayBuracos1 = new int[10][10];
+    public static int[][] arrayBuracos2 = new int[10][10];
+
+    protected static int dificuldadeMedia(int jogador) {
+        int jogadaAdicionada = 0;
+        int i = 0;
+        Random r = new Random();
+
+        for (int j = 0; (j < 10) && (jogadaAdicionada < 3); j++) {
+            for (int k = 0; (k < 10) && (jogadaAdicionada < 3); k++) {
+                if ((Tabuleiro.verificarPosicaoLivre(j, k, jogador) == 1) &&
+                        ((arrayBuracos1[j][k] == 0 && jogador == 1) || (arrayBuracos2[j][k] == 0 && jogador == 2))) {
+
+                    if (Tabuleiro.adicionarNovaJogada(j, k, jogador)==1) {
+                        if (k<9) {
+                            posicaoSeguinteBuracos(j, k, jogador);
+                        }
+                        k++;
+                    }
+                    jogadaAdicionada++;
+                }
+            }
+        }
+
+        Tabuleiro.chamarTabuleiroJogadas(jogador);
+        return 0;
+    }
+
+    private static void posicaoSeguinteBuracos(int i, int j, int tabuleiro) {
+        if (tabuleiro == 1) {
+            if (j < 9) {
+                arrayBuracos1[i][j + 1] = 1;
+            } else if (j == 9 && i < 9) {
+                arrayBuracos1[i + 1][0] = 1;
+            } else {
+                arrayBuracos1[i][j] = 1;
+            }
+        } else {
+            if (j < 9) {
+                arrayBuracos2[i][j + 1] = 1;
+            } else if (j == 9 && i < 9) {
+                arrayBuracos2[i + 1][0] = 1;
+            } else {
+                arrayBuracos2[i][j] = 1;
+            }
+        }
+
+    }
+
     public static int[] posicaoCentral1 = new int[3];
     public static int[] posicaoCentral2 = new int[3];
 
-    protected static int dificuldadeMedia(int jogador) {
+    protected static int dificuldadeAlta(int jogador) {
         int[] posicao = new int[3];
         int i = 0;
         Random r = new Random();
 
         while (i < 3) {
-            System.out.println("-" + posicaoCentral2[0] + "-" + posicaoCentral2[1] + "-" + posicaoCentral2[2] + "ANTES");
             if (jogador == 1 && posicaoCentral1[2] == 1) {
-                if(adicionarAdjacente(posicaoCentral1[0], posicaoCentral1[1], jogador)== 0) {
+                if (adicionarAdjacente(posicaoCentral1[0], posicaoCentral1[1], jogador) == 0) {
                     i--;
-                };
+                }
+                ;
             } else if (jogador == 2 && posicaoCentral2[2] == 1) {
-                if(adicionarAdjacente(posicaoCentral2[0], posicaoCentral2[1], jogador)== 0) {
+                if (adicionarAdjacente(posicaoCentral2[0], posicaoCentral2[1], jogador) == 0) {
                     i--;
-                };
+                }
+                ;
             } else { //se nao tem posicao central vai buscar um random
 
                 while (Tabuleiro.verificarPosicaoLivre(posicao[0], posicao[1], jogador) == 0) {
@@ -86,14 +136,6 @@ public class AlgoritmosPesquisa {
         return 0;
     }
 
-
-    protected static int dificuldadeAlta(int jogador) {
-        int[] posicao = new int[2];
-        int i = 0;
-        Random r = new Random();
-
-        return 1; //[X][Y]
-    }
 
     private static int adicionarAdjacente(int i, int j, int jogador) {
         int posicaoValida = 0;
